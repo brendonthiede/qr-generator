@@ -1,0 +1,3 @@
+https://example.com/sample/LandingPage
+https://example.com/sample/LandingPage/SubPage1
+https://example.com/sample/LandingPage/SubPage2
