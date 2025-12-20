@@ -50,7 +50,7 @@ with open(INPUT_FILE) as f:
 
         # scale the logo based on the QR code size
         logo_size = qr_w * LOGO_SCALE
-        logo.thumbnail((logo_size, logo_size), Image.ANTIALIAS)
+        logo.thumbnail((logo_size, logo_size), Image.Resampling.LANCZOS)
 
         # compute position to center the logo
         pos = ((qr_w - logo.width) // 2, (qr_h - logo.height) // 2)
@@ -60,6 +60,8 @@ with open(INPUT_FILE) as f:
         parts = urlparse(url).path.strip("/").split("/")
         path = "/".join(parts[1:])
         safe = "".join(c if c.isalnum() else "_" for c in path)
+        if len(safe) == 0:
+            safe = f"qr_{idx+1}"
         filename = f"{safe}.png"
         path = os.path.join(OUTPUT_DIR, filename)
         qr_img.save(path)
